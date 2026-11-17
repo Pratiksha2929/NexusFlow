@@ -1,11 +1,62 @@
 
+import { useState } from 'react'
+
 function Devices() {
-  const devices = [
+  const [search, setSearch] = useState('')
+  const [showForm, setShowForm] = useState(false)
+  const [deviceName, setDeviceName] = useState('')
+  const [deviceType, setDeviceType] = useState('')
+
+  const [devices, setDevices] = useState([
     { id: 1, name: 'Temperature Sensor', type: 'Temperature', status: 'Online', value: '28°C' },
     { id: 2, name: 'Humidity Sensor', type: 'Humidity', status: 'Online', value: '65%' },
     { id: 3, name: 'Motion Detector', type: 'Motion', status: 'Offline', value: 'No signal' },
     { id: 4, name: 'Air Quality Sensor', type: 'Air Quality', status: 'Online', value: '42 AQI' }
-  ]
+  ])
+
+  const filteredDevices = devices.filter((device) =>
+    device.name.toLowerCase().includes(search.toLowerCase()) ||
+    device.type.toLowerCase().includes(search.toLowerCase())
+  )
+
+  
+const handleAddDevice = (event) => {
+  event.preventDefault()
+
+  const newDevice = {
+    id: Date.now(),
+    name: deviceName,
+    type: deviceType,
+    status: 'Online',
+    value: 'No data'
+  }
+
+  setDevices([...devices, newDevice])
+  setDeviceName('')
+  setDeviceType('')
+  setShowForm(false)
+}
+
+const handleDeleteDevice = (id) => {
+  setDevices((currentDevices) =>
+    currentDevices.filter((device) => device.id !== id)
+  )
+}
+
+
+const handleToggleStatus = (id) => {
+  setDevices((currentDevices) =>
+    currentDevices.map((device) =>
+      device.id === id
+        ? {
+            ...device,
+            status: device.status === 'Online' ? 'Offline' : 'Online'
+          }
+        : device
+    )
+  )
+}
+
 
   return (
     <section className="devices-page">
@@ -14,7 +65,46 @@ function Devices() {
           <h1>IoT Devices</h1>
           <p>Monitor and manage your connected devices.</p>
         </div>
-        <button className="add-device-btn">+ Add Device</button>
+
+        <button
+          className="add-device-btn"
+          onClick={() => setShowForm(!showForm)}
+        >
+          + Add Device
+        </button>
+      </div>
+
+      {showForm && (
+        <form className="add-device-form" onSubmit={handleAddDevice}>
+          <input
+            type="text"
+            placeholder="Enter device name"
+            value={deviceName}
+            onChange={(event) => setDeviceName(event.target.value)}
+            required
+          />
+
+          <input
+            type="text"
+            placeholder="Enter device type"
+            value={deviceType}
+            onChange={(event) => setDeviceType(event.target.value)}
+            required
+          />
+
+          <button type="submit" className="add-device-btn">
+            Save Device
+          </button>
+        </form>
+      )}
+
+      <div className="device-search">
+        <input
+          type="text"
+          placeholder="Search devices by name or type..."
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
       </div>
 
       <div className="devices-table">
@@ -25,16 +115,36 @@ function Devices() {
           <span>Status</span>
         </div>
 
-        {devices.map((device) => (
-          <div className="device-row" key={device.id}>
-            <span>{device.name}</span>
-            <span>{device.type}</span>
-            <span>{device.value}</span>
-            <span className={device.status === 'Online' ? 'device-online' : 'device-offline'}>
-              {device.status}
-            </span>
-          </div>
-        ))}
+        {filteredDevices.length > 0 ? (
+          filteredDevices.map((device) => (
+            <div className="device-row" key={device.id}>
+              <span>{device.name}</span>
+              <span>{device.type}</span>
+              <span>{device.value}</span>
+              <span className={device.status === 'Online' ? 'device-online' : 'device-offline'}>
+  {device.status}
+</span>
+
+<button
+  className="delete-device-btn"
+  onClick={() => handleDeleteDevice(device.id)}
+>
+  Delete
+</button>
+
+
+<button
+  className="status-toggle-btn"
+  onClick={() => handleToggleStatus(device.id)}
+>
+  Change Status
+</button>
+
+            </div>
+          ))
+        ) : (
+          <p className="no-devices">No matching devices found.</p>
+        )}
       </div>
     </section>
   )

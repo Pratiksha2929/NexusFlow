@@ -177,3 +177,180 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+
+
+/* Devices Page */
+
+.devices-page {
+  margin-top: 35px;
+}
+
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+
+.page-heading h1 {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.page-heading p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.add-device-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add-device-btn:hover {
+  background: #1d4ed8;
+}
+
+.device-search {
+  margin-bottom: 20px;
+}
+
+.device-search input {
+  width: 100%;
+  max-width: 400px;
+  padding: 13px 16px;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  outline: none;
+  background: white;
+}
+
+.device-search input:focus {
+  border-color: #2563eb;
+}
+
+.devices-table {
+  background: white;
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  overflow-x: auto;
+}
+
+.device-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 0.8fr;
+  gap: 15px;
+  align-items: center;
+  padding: 20px 10px;
+  border-bottom: 1px solid #edf0f5;
+  font-size: 14px;
+  min-width: 550px;
+}
+
+.device-row:last-child {
+  border-bottom: none;
+}
+
+.table-heading {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.device-online {
+  color: #15803d;
+  background: #dcfce7;
+  padding: 6px 12px;
+  border-radius: 20px;
+  width: fit-content;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.device-offline {
+  color: #b91c1c;
+  background: #fee2e2;
+  padding: 6px 12px;
+  border-radius: 20px;
+  width: fit-content;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 650px) {
+  .page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+
+/* Add Device Form */
+.add-device-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.add-device-form input {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 15px;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  outline: none;
+}
+
+.add-device-form input:focus {
+  border-color: #2563eb;
+}
+
+.add-device-form button {
+  padding: 12px 20px;
+}
+
+
+/* Device Status Toggle Button */
+.status-toggle-btn {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  padding: 8px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-toggle-btn:hover {
+  background: #dbeafe;
+}
+
+.delete-device-btn {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  padding: 8px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.delete-device-btn:hover {
+  background: #fecaca;
+}
