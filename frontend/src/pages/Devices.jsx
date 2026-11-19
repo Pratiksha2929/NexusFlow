@@ -14,10 +14,24 @@ function Devices() {
     { id: 4, name: 'Air Quality Sensor', type: 'Air Quality', status: 'Online', value: '42 AQI' }
   ])
 
+
+  const totalDevices = devices.length
+
+const onlineDevices = devices.filter(
+  (device) => device.status === 'Online'
+).length
+
+const offlineDevices = devices.filter(
+  (device) => device.status === 'Offline'
+).length
+
   const filteredDevices = devices.filter((device) =>
+    
     device.name.toLowerCase().includes(search.toLowerCase()) ||
     device.type.toLowerCase().includes(search.toLowerCase())
   )
+
+  
 
   
 const handleAddDevice = (event) => {
@@ -99,6 +113,24 @@ const handleToggleStatus = (id) => {
       )}
 
       <div className="device-search">
+
+<div className="device-stats">
+  <div className="device-stat-card">
+    <h3>Total Devices</h3>
+    <p>{totalDevices}</p>
+  </div>
+
+  <div className="device-stat-card">
+    <h3>Online Devices</h3>
+    <p>{onlineDevices}</p>
+  </div>
+
+  <div className="device-stat-card">
+    <h3>Offline Devices</h3>
+    <p>{offlineDevices}</p>
+  </div>
+</div>
+
         <input
           type="text"
           placeholder="Search devices by name or type..."
