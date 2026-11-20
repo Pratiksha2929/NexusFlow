@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 function Devices() {
   const [search, setSearch] = useState('')
+  const [statusFilter, setStatusFilter] = useState('All')
   const [showForm, setShowForm] = useState(false)
   const [deviceName, setDeviceName] = useState('')
   const [deviceType, setDeviceType] = useState('')
@@ -25,11 +26,17 @@ const offlineDevices = devices.filter(
   (device) => device.status === 'Offline'
 ).length
 
-  const filteredDevices = devices.filter((device) =>
-    
+  
+const filteredDevices = devices.filter((device) => {
+  const matchesSearch =
     device.name.toLowerCase().includes(search.toLowerCase()) ||
     device.type.toLowerCase().includes(search.toLowerCase())
-  )
+
+  const matchesStatus =
+    statusFilter === 'All' || device.status === statusFilter
+
+  return matchesSearch && matchesStatus
+})
 
   
 
@@ -131,13 +138,25 @@ const handleToggleStatus = (id) => {
   </div>
 </div>
 
-        <input
-          type="text"
-          placeholder="Search devices by name or type..."
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
-      </div>
+        
+<div className="device-search">
+  <input
+    type="text"
+    placeholder="Search devices by name or type..."
+    value={search}
+    onChange={(event) => setSearch(event.target.value)}
+  />
+
+  <select
+    value={statusFilter}
+    onChange={(event) => setStatusFilter(event.target.value)}
+  >
+    <option value="All">All Devices</option>
+    <option value="Online">Online Devices</option>
+    <option value="Offline">Offline Devices</option>
+  </select>
+</div>
+</div>
 
       <div className="devices-table">
         <div className="device-row table-heading">

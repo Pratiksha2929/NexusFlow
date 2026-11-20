@@ -218,9 +218,40 @@ body {
   background: #1d4ed8;
 }
 
+
 .device-search {
+  display: flex;
+  gap: 15px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
+
+.device-search input {
+  flex: 1;
+  min-width: 220px;
+  padding: 13px 16px;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  outline: none;
+  background: white;
+}
+
+.device-search select {
+  min-width: 180px;
+  padding: 13px 16px;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  background: white;
+  color: #334155;
+  cursor: pointer;
+  outline: none;
+}
+
+.device-search input:focus,
+.device-search select:focus {
+  border-color: #2563eb;
+}
+
 
 .device-search input {
   width: 100%;
