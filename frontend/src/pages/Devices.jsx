@@ -4,6 +4,7 @@ import { useState } from 'react'
 function Devices() {
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState('All')
+  const [selectedDevice, setSelectedDevice] = useState(null)
   const [showForm, setShowForm] = useState(false)
   const [deviceName, setDeviceName] = useState('')
   const [deviceType, setDeviceType] = useState('')
@@ -169,7 +170,14 @@ const handleToggleStatus = (id) => {
         {filteredDevices.length > 0 ? (
           filteredDevices.map((device) => (
             <div className="device-row" key={device.id}>
-              <span>{device.name}</span>
+              
+<span
+  className="device-name-clickable"
+  onClick={() => setSelectedDevice(device)}
+>
+  {device.name}
+</span>
+
               <span>{device.type}</span>
               <span>{device.value}</span>
               <span className={device.status === 'Online' ? 'device-online' : 'device-offline'}>
@@ -197,6 +205,27 @@ const handleToggleStatus = (id) => {
           <p className="no-devices">No matching devices found.</p>
         )}
       </div>
+
+
+{selectedDevice && (
+  <div className="device-details">
+    <div className="device-details-header">
+      <h2>Device Details</h2>
+      <button onClick={() => setSelectedDevice(null)}>
+        Close
+      </button>
+    </div>
+
+    <div className="device-details-content">
+      <p><strong>Device Name:</strong> {selectedDevice.name}</p>
+      <p><strong>Device Type:</strong> {selectedDevice.type}</p>
+      <p><strong>Current Value:</strong> {selectedDevice.value}</p>
+      <p><strong>Status:</strong> {selectedDevice.status}</p>
+    </div>
+  </div>
+)}
+
+
     </section>
   )
 }

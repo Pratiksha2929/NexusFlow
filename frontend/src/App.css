@@ -422,3 +422,59 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+
+
+/* Clickable Device Name */
+.device-name-clickable {
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.device-name-clickable:hover {
+  text-decoration: underline;
+}
+
+/* Device Details Panel */
+.device-details {
+  margin-top: 25px;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.device-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.device-details-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #1e293b;
+}
+
+.device-details-header button {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  padding: 8px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.device-details-content p {
+  margin: 12px 0;
+  color: #475569;
+  font-size: 14px;
+}
+
+.device-details-content strong {
+  color: #1e293b;
+}
